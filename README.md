@@ -3,13 +3,7 @@
 
 - Find a partner to make a team, a team is made of 2 students, not 1, not 3...
 
-- For the
-
-   
-
-  2nd of march 2020
-
-  :
+- For the 2nd of march 2020:
 
   - You have to communicate to the teacher the students of your team and the private Git Repo for the 15th of february 2020
   - You have to send a description of your application, its features and prerequisites
