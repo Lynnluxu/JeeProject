@@ -1,4 +1,4 @@
-# JeeProject
+# JeeProject - Paul GILLE & Lu XU
 **Now you're almost a superstar in JEE, you have to show your skills!**
 
 - Find a partner to make a team, a team is made of 2 students, not 1, not 3...
