@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/application.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/home}" method="get">
+    <button class="btn btn-primary btn-block btn-lg" type="Submit">Go To Home page</button>
+</form>
+<div class="container">
+    <div class="row">
+        <h1>Owner space:</h1>
+    </div>
+    <div class="row">
+        <label class="col-md-3 col-form-label">First Name : </label>
+        <p  th:utext="${user.getName()}"></p>
+    </div>
+    <div class="row">
+        <label class="col-md-3 col-form-label">Last Name : </label>
+        <p  th:utext="${user.getLastName()}"></p>
+    </div>
+    <div class="row">
+        <label class="col-md-3 col-form-label">Email : </label>
+        <p  th:utext="${user.getEmail()}"></p>
+    </div>
+    <div class="row">
+        <h1>My real estate:</h1>
+    </div>
+    <div class="row">
+        <div th:each="appartment: ${appartOwner}" class="col-md-4">
+            <div class="card mb-3">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <form th:action="@{/appartment_details/(id=${appartment.id})}" method="post">
+                        <h5 th:utext="${appartment.title}" class="card-title"></h5>
+                        <p th:utext="${appartment.description}"  class="card-text">Description</p>
+                        <button class="btn btn-primary" type="submit">Détails</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>Reservation</h1>
+    <h3>Reservation request for :</h3>
+    <div th:each="reservation: ${reservations}" th:if="${user.id == reservation.value.ownerId && reservation.value.reservationStatus.getName() == 'CREATED'}">
+        <div th:each="appartment: ${appartOwner}" th:if="${appartment.id == reservation.value.appartmentId}">
+            <div class="row">
+                <label class="col-md-5 col-form-label">Appartment title : </label>
+                <p th:utext="${appartment.title}"></p>
+                <form th:action="@{/reservationDecision(choice=1, id=${reservation.value.reservationId})}" method="post">
+                    <button  class="btn btn-primary" type="submit">Accept</button>
+                </form>
+                <form th:action="@{/reservationDecision(choice=0, id=${reservation.value.reservationId})}" method="post">
+                    <button class="btn btn-primary" type="submit">Refuse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <h3>My request : </h3>
+    <div class="row">
+        <div th:each="reservation: ${reservations}" class="col-md-4" th:if="${user.id == reservation.value.renterId}">
+            <div th:each="appartment: ${appartments}" th:if="${reservation.value.appartmentId == appartment.id}">
+                <label class="col-md-5 col-form-label">Reservation status : </label>
+                <p th:utext="${reservation.value.reservationStatus.getName()}"><p>
+                <label class="col-md-5 col-form-label">For appartment : </label>
+                <p th:utext="${appartment.title}"><p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<form th:action="@{/logout}" method="get" class="fixed-bottom">
+    <button class="btn btn-danger btn-block btn-lg" type="Submit">Logout</button>
+</form>-->
+</body>
+</html>

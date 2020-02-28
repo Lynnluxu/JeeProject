@@ -25,23 +25,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public ModelAndView connection(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/login");
-        return modelAndView;
-    }
-    /*
-    @RequestMapping(value="/perform_logout", method = RequestMethod.GET)
-    public ModelAndView logout(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        auth.setAuthenticated(false);
-        modelAndView.addObject("logoutMessage", "User has been logout successfully");
-        modelAndView.setViewName("/logout");
-        return modelAndView;
-    }*/
-
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
@@ -69,16 +52,6 @@ public class LoginController {
             modelAndView.setViewName("registration");
 
         }
-        return modelAndView;
-    }
-
-    @RequestMapping(value="/home", method = RequestMethod.GET)
-    public ModelAndView home(){
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName());
-        modelAndView.setViewName("home.html");
         return modelAndView;
     }
 

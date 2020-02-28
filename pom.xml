@@ -8,16 +8,13 @@
 		<version>2.1.9.RELEASE</version>
 		<relativePath/>
 	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.istv</groupId>
 	<artifactId>application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>application</name>
 	<packaging>jar</packaging>
-
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -71,7 +68,24 @@
 			<version>8.0.13</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>5.1.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-spring</artifactId>
+			<version>5.10.0</version>
+		</dependency>
+
 	</dependencies>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<docker.image.prefix>springio</docker.image.prefix>
+	</properties>
 
 	<build>
 		<plugins>
@@ -79,6 +93,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.6</version>
+				<configuration>
+					<repository>istv/application</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

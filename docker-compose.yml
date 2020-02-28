@@ -3,15 +3,16 @@ version: '3.7'
 # Define services
 services:
   # App backend service
-  spring_app_back:
+  spring_app:
     # Configuration for building the docker image for the backend service
     build:
-      context: . # Use an image built from the specified dockerfile in the `application` directory.
+      context: . # Use an image built from the specified dockerfile in the `.` directory.
       dockerfile: Dockerfile
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     depends_on:
       - db # This service depends on mysql. Start that first.
+      - activemq
     environment: # Pass environment variables to the service
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/application?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
@@ -23,7 +24,7 @@ services:
   db:
     image: mysql:8.0
     ports:
-      - "3306:3306"
+      - "3307:3306"
     restart: always
     environment:
       MYSQL_DATABASE: application
@@ -32,6 +33,17 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - backend
+
+  activemq:
+    image: rmohr/activemq:5.10.0
+    container_name: activemq
+    environment:
+      - "TZ=Europe/Paris"
+    volumes:
+      - db-data:/var/lib/activemq"
+    ports:
+      - "61616:61616" # broker (admin:adminactivemq)(amq:amq)
+      - "8161:8161"   # web    http://boot2docker:8161/admin (admin:admin)
 
 # Volumes
 volumes:

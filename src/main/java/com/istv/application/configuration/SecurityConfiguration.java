@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
@@ -51,7 +52,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }

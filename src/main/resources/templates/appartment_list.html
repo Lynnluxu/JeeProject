@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/application.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form th:action="@{/home}" method="get">
+    <button class="btn btn-primary btn-block btn-lg" type="Submit">Go To Home page</button>
+</form>
+<div class="m-4"></div>
+<div class="container">
+    <h4 class="display-6 text-center">All appartments available:</h4>
+
+    <div class="row">
+        <!-- filter <div th:each="appartment: ${appartments.?[owner.name == __${user_name}__]}" class="col-md-4">-->
+        <div  th:each="appartment: ${appartments}" class="col-md-4">
+            <div class="card mb-3">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <form th:action="@{/appartment_details/(id=${appartment.id})}" method="post">
+                        <h5 th:utext="${appartment.title}" class="card-title"></h5>
+                        <p th:utext="${appartment.description}" class="card-text">Description</p>
+                        <button class="btn btn-primary" type="submit">Détails</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-5"></div>
+<form th:action="@{/logout}" method="get" class="fixed-bottom">
+    <button class="btn btn-danger btn-block btn-lg" type="Submit">Logout</button>
+</form>
+</body>
+</html>
