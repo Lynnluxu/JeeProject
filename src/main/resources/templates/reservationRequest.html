@@ -13,7 +13,9 @@
     <button class="btn btn-primary btn-block btn-lg" type="Submit">Go To Home</button>
 </form>
 <div class="container">
-    <span th:utext="${success}"></span>
+    <div class="row">
+        <span th:utext="${success}" class="col-md-10 offset-md-1 text-center"></span>
+    </div>
 </div>
 <form th:action="@{/logout}" method="get" class="fixed-bottom">
     <button class="btn btn-danger btn-block btn-lg" type="Submit">Logout</button>

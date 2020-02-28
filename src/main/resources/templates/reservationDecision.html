@@ -13,7 +13,9 @@
     <button class="btn btn-warning btn-block btn-lg" type="Submit">Go To Profile</button>
 </form>
 <div class="container">
-    <span th:utext="${reservationStatus}"></span>
+    <div class="row mt-5">
+        <span th:utext="${reservationStatus}" class="col-md-10 offset-md-1 text-center"></span>
+    </div>
 </div>
 <form th:action="@{/logout}" method="get" class="fixed-bottom">
     <button class="btn btn-danger btn-block btn-lg" type="Submit">Logout</button>

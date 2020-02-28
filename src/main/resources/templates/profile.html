@@ -13,23 +13,23 @@
     <button class="btn btn-primary btn-block btn-lg" type="Submit">Go To Home page</button>
 </form>
 <div class="container">
-    <div class="row">
-        <h1>Owner space:</h1>
+    <div class="row mt-3">
+        <h1 class="text-center col-md-8 offset-md-2">Owner space:</h1>
     </div>
     <div class="row">
-        <label class="col-md-3 col-form-label">First Name : </label>
-        <p  th:utext="${user.getName()}"></p>
+        <label class="col-md-2 offset-md-1 align-middle">First Name : </label>
+        <p  th:utext="${user.getName()}" class="col-md-8 align-middle"></p>
     </div>
     <div class="row">
-        <label class="col-md-3 col-form-label">Last Name : </label>
-        <p  th:utext="${user.getLastName()}"></p>
+        <label class="col-md-2 offset-md-1 align-middle">Last Name : </label>
+        <p  th:utext="${user.getLastName()}" class="col-md-8 align-middle"></p>
     </div>
     <div class="row">
-        <label class="col-md-3 col-form-label">Email : </label>
-        <p  th:utext="${user.getEmail()}"></p>
+        <label class="col-md-2 offset-md-1 align-middle">Email : </label>
+        <p  th:utext="${user.getEmail()}" class="col-md-8 align-middle"></p>
     </div>
-    <div class="row">
-        <h1>My real estate:</h1>
+    <div class="row mt-3">
+        <h1 class="text-center col-md-8 offset-md-2">My real estate:</h1>
     </div>
     <div class="row">
         <div th:each="appartment: ${appartOwner}" class="col-md-4">
@@ -45,30 +45,33 @@
             </div>
         </div>
     </div>
-    <h1>Reservation</h1>
-    <h3>Reservation request for :</h3>
+    <h1 class="text-center col-md-8 offset-md-2 mt-3">Reservation</h1>
+    <h3 class="mt-3">Reservation request for :</h3>
     <div th:each="reservation: ${reservations}" th:if="${user.id == reservation.value.ownerId && reservation.value.reservationStatus.getName() == 'CREATED'}">
         <div th:each="appartment: ${appartOwner}" th:if="${appartment.id == reservation.value.appartmentId}">
             <div class="row">
-                <label class="col-md-5 col-form-label">Appartment title : </label>
-                <p th:utext="${appartment.title}"></p>
-                <form th:action="@{/reservationDecision(choice=1, id=${reservation.value.reservationId})}" method="post">
-                    <button  class="btn btn-primary" type="submit">Accept</button>
+                <label class="col-md-3 offset-md-2 align-middle">Appartment title : </label>
+                <p th:utext="${appartment.title}" class="col-md-2"></p>
+                <form class="mr-4 offset-md-1" th:action="@{/reservationDecision(choice=1, id=${reservation.value.reservationId})}" method="post">
+                    <button  class="btn btn-primary align-middle" type="submit">Accept</button>
                 </form>
                 <form th:action="@{/reservationDecision(choice=0, id=${reservation.value.reservationId})}" method="post">
-                    <button class="btn btn-primary" type="submit">Refuse</button>
+                    <button class="btn btn-warning align-middle" type="submit">Refuse</button>
                 </form>
             </div>
         </div>
     </div>
-    <h3>My request : </h3>
-    <div class="row">
-        <div th:each="reservation: ${reservations}" class="col-md-4" th:if="${user.id == reservation.value.renterId}">
+    <h3 class="mt-5">My request : </h3>
+        <div th:each="reservation: ${reservations}" th:if="${user.id == reservation.value.renterId}">
             <div th:each="appartment: ${appartments}" th:if="${reservation.value.appartmentId == appartment.id}">
-                <label class="col-md-5 col-form-label">Reservation status : </label>
-                <p th:utext="${reservation.value.reservationStatus.getName()}"><p>
-                <label class="col-md-5 col-form-label">For appartment : </label>
-                <p th:utext="${appartment.title}"><p>
+                <div class="row">
+                    <label class="col-md-3 offset-md-2 align-middle">Reservation status : </label>
+                    <p th:utext="${reservation.value.reservationStatus.getName()}" class="col-md-3 align-middle"><p>
+                </div>    
+                <div class="row">
+                    <label class="col-md-3 offset-md-2 align-middle">For appartment : </label>
+                    <p th:utext="${appartment.title}" class="col-md-3 align-middle"><p>
+                </div>
             </div>
         </div>
     </div>
