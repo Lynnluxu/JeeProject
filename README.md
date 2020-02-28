@@ -1,4 +1,23 @@
 # JeeProject - Paul GILLE & Lu XU
+
+1.
+
+```bash
+./mvnw package && java -jar target/gs-spring-boot-docker-0.1.0.jar
+```
+
+2.
+
+```bash
+./mvnw install dockerfile:build
+```
+
+3.
+
+```bash
+docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+```
+
 **Now you're almost a superstar in JEE, you have to show your skills!**
 
 - Find a partner to make a team, a team is made of 2 students, not 1, not 3...
