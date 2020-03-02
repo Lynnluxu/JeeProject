@@ -1,4 +1,79 @@
+<<<<<<< HEAD
 - # JeeProject - Paul GILLE & Lu XU
+=======
+# JeeProject - Paul GILLE & Lu XU
+## Clone the application
+
+git clone https://github.com/Lynnluxu/JeeProject.git
+
+> cd application
+
+## Create MySQL database
+
+create database application Change MySQL username and password as per your MySQL installation
+
+> open src/main/resources/application.properties file.
+
+change spring.datasource.username and spring.datasource.password properties as per your mysql installation
+
+## Start ActiveMQ Message Broker
+
+Download [ActiveMQ](http://activemq.apache.org/components/classic/) Message Broker
+
+or
+
+```
+wget http://activemq.apache.org/path/tofile/apache-activemq-x.x.x-bin.tar.gz
+```
+
+and
+
+```
+cd [activemq_install_dir]
+tar zxvf activemq-x.x.x-bin.tar.gz
+```
+
+and start it
+
+```
+cd [activemq_install_dir]/bin
+./activemq start
+```
+
+You can quickly check the WebConsole [available at http://localhost:8161/admin/ with credentials admin/admin.
+
+[ActiveMQ documentation](http://activemq.apache.org/components/classic/documentation)
+
+## Run the app
+
+You can run the spring boot app by typing the following command -
+
+> mvn spring-boot:run
+
+The server will start on port 8080.
+
+You can also package the application in the form of a jar file and then run it like so -
+
+> mvn package
+
+> java -jar target/polls-0.0.1-SNAPSHOT.jar
+
+## Run the app with Docker
+
+> cd [JeeProject directory]
+
+> mvn -Dmaven.test.skip=true package
+
+Start Docker
+
+> docker-compose build
+
+> docker-compose up
+
+
+
+Now you're almost a superstar in JEE, you have to show your skills!**
+>>>>>>> 91952d0... update README.me
 
   ## Clone the application
 
